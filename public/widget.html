@@ -1,0 +1,100 @@
+<!-- Pegá este bloque UNA SOLA VEZ en la plantilla de producto de Tiendanube. -->
+<section id="lupoReviews" class="lupo-reviews" aria-labelledby="lupoReviewsTitle">
+  <div class="lupo-reviews__head">
+    <div>
+      <span class="lupo-reviews__eyebrow">OPINIONES REALES</span>
+      <h2 id="lupoReviewsTitle">Reseñas de clientes</h2>
+    </div>
+    <div class="lupo-reviews__summary" aria-live="polite">
+      <strong id="lupoReviewsAverage">—</strong>
+      <div><span id="lupoReviewsStars" aria-hidden="true">☆☆☆☆☆</span><small id="lupoReviewsTotal">Sin reseñas todavía</small></div>
+    </div>
+  </div>
+
+  <div id="lupoReviewsList" class="lupo-reviews__grid"></div>
+
+  <button id="lupoReviewOpen" class="lupo-reviews__open" type="button">
+    Escribir una reseña <span>→</span>
+  </button>
+
+  <dialog id="lupoReviewDialog" class="lupo-review-dialog">
+    <form id="lupoReviewForm" class="lupo-review-form" enctype="multipart/form-data">
+      <button type="button" id="lupoReviewClose" class="lupo-review-form__close" aria-label="Cerrar">×</button>
+      <span class="lupo-reviews__eyebrow">TU EXPERIENCIA</span>
+      <h3>¿Qué te pareció este producto?</h3>
+
+      <fieldset class="lupo-review-form__rating">
+        <legend>Calificación</legend>
+        <div class="lupo-review-form__stars">
+          <input id="lr5" name="rating" type="radio" value="5" required><label for="lr5">★</label>
+          <input id="lr4" name="rating" type="radio" value="4"><label for="lr4">★</label>
+          <input id="lr3" name="rating" type="radio" value="3"><label for="lr3">★</label>
+          <input id="lr2" name="rating" type="radio" value="2"><label for="lr2">★</label>
+          <input id="lr1" name="rating" type="radio" value="1"><label for="lr1">★</label>
+        </div>
+      </fieldset>
+
+      <div class="lupo-review-form__row">
+        <label>Nombre<input name="customer_name" maxlength="80" required></label>
+        <label>Email<input name="customer_email" type="email" maxlength="180" required></label>
+      </div>
+      <label>Título opcional<input name="title" maxlength="100" placeholder="Ej: Súper cómodo"></label>
+      <label>Tu reseña<textarea name="comment" minlength="10" maxlength="1200" rows="5" required placeholder="Contanos cómo te quedó y qué te gustó"></textarea></label>
+
+      <label class="lupo-review-form__upload">
+        <strong>Agregar fotos</strong>
+        <span>Hasta 3 imágenes JPG, PNG o WEBP · máximo 5 MB cada una</span>
+        <input id="lupoReviewImages" name="images" type="file" accept="image/jpeg,image/png,image/webp" multiple>
+      </label>
+      <div id="lupoReviewPreview" class="lupo-review-form__preview"></div>
+      <button class="lupo-review-form__submit" type="submit">Enviar reseña</button>
+      <p id="lupoReviewMessage" class="lupo-review-form__message" aria-live="polite"></p>
+    </form>
+  </dialog>
+</section>
+
+<style>
+#lupoReviews{--lr-blue:#29abe2;--lr-black:#0d1216;--lr-line:#e4e7e9;max-width:1180px;margin:72px auto;padding:0 20px;color:#161a1d;font-family:inherit}.lupo-reviews__head{display:flex;justify-content:space-between;align-items:end;gap:30px;padding-bottom:24px;border-bottom:1px solid var(--lr-line)}.lupo-reviews__eyebrow{display:block;margin-bottom:9px;color:#078ac3;font-size:11px;font-weight:700;letter-spacing:.16em}.lupo-reviews h2{margin:0;font-size:clamp(28px,3vw,42px);line-height:1.05;letter-spacing:-.04em}.lupo-reviews__summary{display:flex;align-items:center;gap:13px}.lupo-reviews__summary>strong{font-size:38px;line-height:1}.lupo-reviews__summary div{display:grid;gap:3px}.lupo-reviews__summary span{color:var(--lr-blue);font-size:21px;letter-spacing:2px}.lupo-reviews__summary small{color:#747b80}.lupo-reviews__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:24px 0}.lupo-review-card{padding:20px;border:1px solid var(--lr-line);border-radius:16px;background:#fff}.lupo-review-card__top{display:flex;justify-content:space-between;gap:12px}.lupo-review-card__stars{color:var(--lr-blue);letter-spacing:1px}.lupo-review-card time{color:#858b90;font-size:11px}.lupo-review-card h3{margin:16px 0 7px;font-size:16px}.lupo-review-card p{margin:0;color:#555e64;font-size:14px;line-height:1.55}.lupo-review-card__customer{display:flex;align-items:center;gap:7px;margin-top:16px;font-size:12px;font-weight:700}.lupo-review-card__verified{color:#078ac3}.lupo-review-card__images{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:16px}.lupo-review-card__images img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:9px;cursor:zoom-in}.lupo-reviews__empty{grid-column:1/-1;padding:34px;text-align:center;border:1px dashed #cdd3d6;border-radius:16px;color:#6d757a}.lupo-reviews__open,.lupo-review-form__submit{display:flex;align-items:center;justify-content:center;gap:30px;min-height:48px;padding:12px 22px;border:0;border-radius:11px;background:var(--lr-black);color:#fff;font:700 12px/1 inherit;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}.lupo-review-dialog{width:min(620px,calc(100% - 24px));padding:0;border:0;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.25)}.lupo-review-dialog::backdrop{background:rgba(5,8,10,.7);backdrop-filter:blur(4px)}.lupo-review-form{position:relative;padding:34px}.lupo-review-form h3{margin:0 0 25px;font-size:26px}.lupo-review-form__close{position:absolute;right:17px;top:14px;border:0;background:none;font-size:30px;cursor:pointer}.lupo-review-form label,.lupo-review-form legend{display:grid;gap:7px;margin-bottom:15px;font-size:12px;font-weight:700}.lupo-review-form input:not([type=file]):not([type=radio]),.lupo-review-form textarea{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid #d9dee1;border-radius:10px;background:#f8f9f9;font:400 14px/1.4 inherit;outline:none}.lupo-review-form input:focus,.lupo-review-form textarea:focus{border-color:var(--lr-blue);box-shadow:0 0 0 3px rgba(41,171,226,.12)}.lupo-review-form__row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.lupo-review-form__rating{padding:0;border:0}.lupo-review-form__stars{display:flex;flex-direction:row-reverse;justify-content:flex-end}.lupo-review-form__stars input{position:absolute;opacity:0}.lupo-review-form__stars label{margin:0;color:#d8dde0;font-size:34px;cursor:pointer}.lupo-review-form__stars label:hover,.lupo-review-form__stars label:hover~label,.lupo-review-form__stars input:checked~label{color:var(--lr-blue)}.lupo-review-form__upload{padding:17px;border:1px dashed #bfc8cd;border-radius:12px;cursor:pointer}.lupo-review-form__upload span{color:#7a8287;font-weight:400}.lupo-review-form__preview{display:flex;gap:8px;margin-bottom:14px}.lupo-review-form__preview img{width:72px;height:72px;object-fit:cover;border-radius:9px}.lupo-review-form__submit{width:100%}.lupo-review-form__message{text-align:center;font-size:13px}.lupo-review-lightbox{position:fixed;inset:0;z-index:2147483600;display:grid;place-items:center;padding:24px;background:rgba(0,0,0,.88)}.lupo-review-lightbox img{max-width:min(100%,1000px);max-height:90vh;border-radius:14px}@media(max-width:767px){#lupoReviews{margin:48px auto;padding:0 14px}.lupo-reviews__head{align-items:start;flex-direction:column}.lupo-reviews__grid{grid-template-columns:1fr}.lupo-review-form{padding:28px 18px}.lupo-review-form__row{grid-template-columns:1fr}}
+</style>
+
+<script>
+(function(){
+  var API_URL='https://TU-BACKEND.vercel.app';
+  var root=document.getElementById('lupoReviews');
+  if(!root||root.dataset.ready==='1')return;root.dataset.ready='1';
+  function esc(v){var d=document.createElement('div');d.textContent=v||'';return d.innerHTML}
+  function product(){
+    var canonical=document.querySelector('link[rel="canonical"]');
+    var url=canonical?canonical.href:location.href.split('?')[0];
+    var productNode=document.querySelector('[data-product-id]');
+    var id=(productNode&&productNode.dataset?productNode.dataset.productId:'')||
+      (document.body.className.match(/product-(\d+)/)||[])[1]||
+      location.pathname.replace(/^\/+|\/+$/g,'');
+    var name=(document.querySelector('h1')||{}).textContent||document.title;
+    return{id:String(id),name:String(name).trim(),url:url};
+  }
+  var current=product(),list=document.getElementById('lupoReviewsList');
+  function stars(n){return'★'.repeat(n)+'☆'.repeat(5-n)}
+  function render(data){
+    document.getElementById('lupoReviewsAverage').textContent=data.total?data.average.toFixed(1):'—';
+    document.getElementById('lupoReviewsStars').textContent=data.total?stars(Math.round(data.average)):'☆☆☆☆☆';
+    document.getElementById('lupoReviewsTotal').textContent=data.total?data.total+' '+(data.total===1?'reseña':'reseñas'):'Sin reseñas todavía';
+    if(!data.reviews.length){list.innerHTML='<div class="lupo-reviews__empty">Sé la primera persona en contar su experiencia con este producto.</div>';return}
+    list.innerHTML=data.reviews.map(function(r){return'<article class="lupo-review-card"><div class="lupo-review-card__top"><span class="lupo-review-card__stars">'+stars(r.rating)+'</span><time>'+new Date(r.created_at).toLocaleDateString('es-AR')+'</time></div>'+(r.title?'<h3>'+esc(r.title)+'</h3>':'')+'<p>'+esc(r.comment)+'</p>'+((r.image_urls&&r.image_urls.length)?'<div class="lupo-review-card__images">'+r.image_urls.map(function(src){return'<img src="'+encodeURI(src)+'" alt="Foto de la reseña" loading="lazy">'}).join('')+'</div>':'')+'<div class="lupo-review-card__customer">'+esc(r.customer_name)+(r.verified_purchase?'<span class="lupo-review-card__verified">✓ Compra verificada</span>':'')+'</div></article>'}).join('');
+  }
+  function load(){fetch(API_URL+'/api/reviews/'+encodeURIComponent(current.id)).then(function(r){return r.json()}).then(render).catch(function(){list.innerHTML='<div class="lupo-reviews__empty">No pudimos cargar las reseñas.</div>'})}
+  var dialog=document.getElementById('lupoReviewDialog');
+  document.getElementById('lupoReviewOpen').onclick=function(){dialog.showModal()};
+  document.getElementById('lupoReviewClose').onclick=function(){dialog.close()};
+  dialog.onclick=function(e){if(e.target===dialog)dialog.close()};
+  document.getElementById('lupoReviewImages').onchange=function(e){var box=document.getElementById('lupoReviewPreview'),files=[].slice.call(e.target.files,0,3);box.innerHTML='';files.forEach(function(file){var img=document.createElement('img');img.src=URL.createObjectURL(file);box.appendChild(img)})};
+  list.onclick=function(e){if(e.target.tagName!=='IMG')return;var box=document.createElement('div');box.className='lupo-review-lightbox';box.innerHTML='<img src="'+e.target.src+'" alt="Foto ampliada">';box.onclick=function(){box.remove()};document.body.appendChild(box)};
+  document.getElementById('lupoReviewForm').onsubmit=function(e){
+    e.preventDefault();var form=e.currentTarget,button=form.querySelector('[type=submit]'),message=document.getElementById('lupoReviewMessage'),data=new FormData(form),files=data.getAll('images');
+    if(files.length>3){message.textContent='Podés subir hasta 3 imágenes.';return}
+    data.set('product_id',current.id);data.set('product_name',current.name);data.set('product_url',current.url);button.disabled=true;button.textContent='Enviando…';message.textContent='';
+    fetch(API_URL+'/api/reviews',{method:'POST',body:data}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error);return j})}).then(function(j){message.textContent=j.message;form.reset();document.getElementById('lupoReviewPreview').innerHTML='';setTimeout(function(){dialog.close()},2200)}).catch(function(err){message.textContent=err.message}).finally(function(){button.disabled=false;button.textContent='Enviar reseña'})
+  };
+  load();
+})();
+</script>
