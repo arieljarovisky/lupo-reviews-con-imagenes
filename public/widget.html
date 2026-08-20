@@ -11,7 +11,15 @@
     </div>
   </div>
 
-  <div id="lupoReviewsList" class="lupo-reviews__grid"></div>
+  <div class="lupo-reviews__carousel" id="lupoReviewsCarousel" hidden>
+    <button type="button" class="lupo-reviews__nav lupo-reviews__nav--prev" id="lupoReviewsPrev" aria-label="Reseñas anteriores">‹</button>
+    <div class="lupo-reviews__viewport">
+      <div id="lupoReviewsList" class="lupo-reviews__track"></div>
+    </div>
+    <button type="button" class="lupo-reviews__nav lupo-reviews__nav--next" id="lupoReviewsNext" aria-label="Reseñas siguientes">›</button>
+    <div id="lupoReviewsDots" class="lupo-reviews__dots" aria-hidden="true"></div>
+  </div>
+  <div id="lupoReviewsEmpty" class="lupo-reviews__empty" hidden>Sé la primera persona en contar su experiencia con este producto.</div>
 
   <button id="lupoReviewOpen" class="lupo-reviews__open" type="button">
     Escribir una reseña <span>→</span>
@@ -54,7 +62,70 @@
 </section>
 
 <style>
-#lupoReviews{--lr-blue:#29abe2;--lr-black:#0d1216;--lr-line:#e4e7e9;max-width:1180px;margin:72px auto;padding:0 20px;color:#161a1d;font-family:inherit}.lupo-reviews__head{display:flex;justify-content:space-between;align-items:end;gap:30px;padding-bottom:24px;border-bottom:1px solid var(--lr-line)}.lupo-reviews__eyebrow{display:block;margin-bottom:9px;color:#078ac3;font-size:11px;font-weight:700;letter-spacing:.16em}.lupo-reviews h2{margin:0;font-size:clamp(28px,3vw,42px);line-height:1.05;letter-spacing:-.04em}.lupo-reviews__summary{display:flex;align-items:center;gap:13px}.lupo-reviews__summary>strong{font-size:38px;line-height:1}.lupo-reviews__summary div{display:grid;gap:3px}.lupo-reviews__summary span{color:var(--lr-blue);font-size:21px;letter-spacing:2px}.lupo-reviews__summary small{color:#747b80}.lupo-reviews__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:24px 0}.lupo-review-card{padding:20px;border:1px solid var(--lr-line);border-radius:16px;background:#fff}.lupo-review-card__top{display:flex;justify-content:space-between;gap:12px}.lupo-review-card__stars{color:var(--lr-blue);letter-spacing:1px}.lupo-review-card time{color:#858b90;font-size:11px}.lupo-review-card h3{margin:16px 0 7px;font-size:16px}.lupo-review-card p{margin:0;color:#555e64;font-size:14px;line-height:1.55}.lupo-review-card__customer{display:flex;align-items:center;gap:7px;margin-top:16px;font-size:12px;font-weight:700}.lupo-review-card__verified{color:#078ac3}.lupo-review-card__images{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:16px}.lupo-review-card__images img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:9px;cursor:zoom-in}.lupo-reviews__empty{grid-column:1/-1;padding:34px;text-align:center;border:1px dashed #cdd3d6;border-radius:16px;color:#6d757a}.lupo-reviews__open,.lupo-review-form__submit{display:flex;align-items:center;justify-content:center;gap:30px;min-height:48px;padding:12px 22px;border:0;border-radius:11px;background:var(--lr-black);color:#fff;font:700 12px/1 inherit;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}.lupo-review-dialog{width:min(620px,calc(100% - 24px));padding:0;border:0;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.25)}.lupo-review-dialog::backdrop{background:rgba(5,8,10,.7);backdrop-filter:blur(4px)}.lupo-review-form{position:relative;padding:34px}.lupo-review-form h3{margin:0 0 25px;font-size:26px}.lupo-review-form__close{position:absolute;right:17px;top:14px;border:0;background:none;font-size:30px;cursor:pointer}.lupo-review-form label,.lupo-review-form legend{display:grid;gap:7px;margin-bottom:15px;font-size:12px;font-weight:700}.lupo-review-form input:not([type=file]):not([type=radio]),.lupo-review-form textarea{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid #d9dee1;border-radius:10px;background:#f8f9f9;font:400 14px/1.4 inherit;outline:none}.lupo-review-form input:focus,.lupo-review-form textarea:focus{border-color:var(--lr-blue);box-shadow:0 0 0 3px rgba(41,171,226,.12)}.lupo-review-form__row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.lupo-review-form__rating{padding:0;border:0}.lupo-review-form__stars{display:flex;flex-direction:row-reverse;justify-content:flex-end}.lupo-review-form__stars input{position:absolute;opacity:0}.lupo-review-form__stars label{margin:0;color:#d8dde0;font-size:34px;cursor:pointer}.lupo-review-form__stars label:hover,.lupo-review-form__stars label:hover~label,.lupo-review-form__stars input:checked~label{color:var(--lr-blue)}.lupo-review-form__upload{padding:17px;border:1px dashed #bfc8cd;border-radius:12px;cursor:pointer}.lupo-review-form__upload span{color:#7a8287;font-weight:400}.lupo-review-form__preview{display:flex;gap:8px;margin-bottom:14px}.lupo-review-form__preview img{width:72px;height:72px;object-fit:cover;border-radius:9px}.lupo-review-form__submit{width:100%}.lupo-review-form__message{text-align:center;font-size:13px}.lupo-review-lightbox{position:fixed;inset:0;z-index:2147483600;display:grid;place-items:center;padding:24px;background:rgba(0,0,0,.88)}.lupo-review-lightbox img{max-width:min(100%,1000px);max-height:90vh;border-radius:14px}@media(max-width:767px){#lupoReviews{margin:48px auto;padding:0 14px}.lupo-reviews__head{align-items:start;flex-direction:column}.lupo-reviews__grid{grid-template-columns:1fr}.lupo-review-form{padding:28px 18px}.lupo-review-form__row{grid-template-columns:1fr}}
+#lupoReviews{--lr-blue:#29abe2;--lr-black:#0d1216;--lr-line:#e4e7e9;max-width:1180px;margin:72px auto;padding:0 20px;color:#161a1d;font-family:inherit}
+.lupo-reviews__head{display:flex;justify-content:space-between;align-items:end;gap:30px;padding-bottom:24px;border-bottom:1px solid var(--lr-line)}
+.lupo-reviews__eyebrow{display:block;margin-bottom:9px;color:#078ac3;font-size:11px;font-weight:700;letter-spacing:.16em}
+.lupo-reviews h2{margin:0;font-size:clamp(28px,3vw,42px);line-height:1.05;letter-spacing:-.04em}
+.lupo-reviews__summary{display:flex;align-items:center;gap:13px}
+.lupo-reviews__summary>strong{font-size:38px;line-height:1}
+.lupo-reviews__summary div{display:grid;gap:3px}
+.lupo-reviews__summary span{color:var(--lr-blue);font-size:21px;letter-spacing:2px}
+.lupo-reviews__summary small{color:#747b80}
+.lupo-reviews__carousel{position:relative;margin:24px 0 8px}
+.lupo-reviews__viewport{overflow:hidden}
+.lupo-reviews__track{display:flex;gap:14px;transition:transform .35s ease}
+.lupo-review-card{flex:0 0 calc((100% - 28px) / 3);min-width:0;box-sizing:border-box;padding:20px;border:1px solid var(--lr-line);border-radius:16px;background:#fff}
+.lupo-review-card__top{display:flex;justify-content:space-between;gap:12px}
+.lupo-review-card__stars{color:var(--lr-blue);letter-spacing:1px}
+.lupo-review-card time{color:#858b90;font-size:11px}
+.lupo-review-card h3{margin:16px 0 7px;font-size:16px}
+.lupo-review-card p{margin:0;color:#555e64;font-size:14px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.lupo-review-card__customer{display:flex;align-items:center;gap:7px;margin-top:16px;font-size:12px;font-weight:700}
+.lupo-review-card__verified{color:#078ac3}
+.lupo-review-card__images{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:16px}
+.lupo-review-card__images img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:9px;cursor:zoom-in}
+.lupo-reviews__nav{position:absolute;top:50%;z-index:2;width:42px;height:42px;margin-top:-21px;border:1px solid var(--lr-line);border-radius:50%;background:#fff;color:var(--lr-black);font-size:28px;line-height:1;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.08)}
+.lupo-reviews__nav:hover{border-color:var(--lr-blue);color:var(--lr-blue)}
+.lupo-reviews__nav:disabled{opacity:.35;cursor:default;box-shadow:none}
+.lupo-reviews__nav--prev{left:-8px}
+.lupo-reviews__nav--next{right:-8px}
+.lupo-reviews__dots{display:flex;justify-content:center;gap:8px;margin-top:16px}
+.lupo-reviews__dots button{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:#cfd5d8;cursor:pointer}
+.lupo-reviews__dots button.is-active{background:var(--lr-blue)}
+.lupo-reviews__empty{margin:24px 0;padding:34px;text-align:center;border:1px dashed #cdd3d6;border-radius:16px;color:#6d757a}
+.lupo-reviews__open,.lupo-review-form__submit{display:flex;align-items:center;justify-content:center;gap:30px;min-height:48px;padding:12px 22px;border:0;border-radius:11px;background:var(--lr-black);color:#fff;font:700 12px/1 inherit;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+.lupo-review-dialog{width:min(620px,calc(100% - 24px));padding:0;border:0;border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,.25)}
+.lupo-review-dialog::backdrop{background:rgba(5,8,10,.7);backdrop-filter:blur(4px)}
+.lupo-review-form{position:relative;padding:34px}
+.lupo-review-form h3{margin:0 0 25px;font-size:26px}
+.lupo-review-form__close{position:absolute;right:17px;top:14px;border:0;background:none;font-size:30px;cursor:pointer}
+.lupo-review-form label,.lupo-review-form legend{display:grid;gap:7px;margin-bottom:15px;font-size:12px;font-weight:700}
+.lupo-review-form input:not([type=file]):not([type=radio]),.lupo-review-form textarea{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid #d9dee1;border-radius:10px;background:#f8f9f9;font:400 14px/1.4 inherit;outline:none}
+.lupo-review-form input:focus,.lupo-review-form textarea:focus{border-color:var(--lr-blue);box-shadow:0 0 0 3px rgba(41,171,226,.12)}
+.lupo-review-form__row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lupo-review-form__rating{padding:0;border:0}
+.lupo-review-form__stars{display:flex;flex-direction:row-reverse;justify-content:flex-end}
+.lupo-review-form__stars input{position:absolute;opacity:0}
+.lupo-review-form__stars label{margin:0;color:#d8dde0;font-size:34px;cursor:pointer}
+.lupo-review-form__stars label:hover,.lupo-review-form__stars label:hover~label,.lupo-review-form__stars input:checked~label{color:var(--lr-blue)}
+.lupo-review-form__upload{padding:17px;border:1px dashed #bfc8cd;border-radius:12px;cursor:pointer}
+.lupo-review-form__upload span{color:#7a8287;font-weight:400}
+.lupo-review-form__preview{display:flex;gap:8px;margin-bottom:14px}
+.lupo-review-form__preview img{width:72px;height:72px;object-fit:cover;border-radius:9px}
+.lupo-review-form__submit{width:100%}
+.lupo-review-form__message{text-align:center;font-size:13px}
+.lupo-review-lightbox{position:fixed;inset:0;z-index:2147483600;display:grid;place-items:center;padding:24px;background:rgba(0,0,0,.88)}
+.lupo-review-lightbox img{max-width:min(100%,1000px);max-height:90vh;border-radius:14px}
+@media(max-width:980px){.lupo-review-card{flex-basis:calc((100% - 14px) / 2)}}
+@media(max-width:767px){
+  #lupoReviews{margin:48px auto;padding:0 14px}
+  .lupo-reviews__head{align-items:start;flex-direction:column}
+  .lupo-review-card{flex-basis:100%}
+  .lupo-reviews__nav--prev{left:0}
+  .lupo-reviews__nav--next{right:0}
+  .lupo-review-form{padding:28px 18px}
+  .lupo-review-form__row{grid-template-columns:1fr}
+}
 </style>
 
 <script>
@@ -81,7 +152,6 @@
       if(bodyMatch)id=bodyMatch;
     }
     if(!id){
-      // Evitar data-product-id de carruseles (productos relacionados)
       var productNode=document.querySelector(
         '.js-product-container [data-product-id], form.js-product-form [data-product-id], [data-product-id]:not([data-product-type="list"])'
       );
@@ -91,27 +161,123 @@
     var name=(document.querySelector('h1')||{}).textContent||document.title;
     return{id:String(id),name:String(name).trim(),url:url};
   }
-  var current=product(),list=document.getElementById('lupoReviewsList');
+  var current=product();
+  var list=document.getElementById('lupoReviewsList');
+  var carousel=document.getElementById('lupoReviewsCarousel');
+  var empty=document.getElementById('lupoReviewsEmpty');
+  var dotsBox=document.getElementById('lupoReviewsDots');
+  var prevBtn=document.getElementById('lupoReviewsPrev');
+  var nextBtn=document.getElementById('lupoReviewsNext');
+  var page=0,perPage=3,totalPages=0,autoTimer=null;
+
   function stars(n){return'★'.repeat(n)+'☆'.repeat(5-n)}
+  function visibleCount(){
+    if(window.matchMedia('(max-width:767px)').matches)return 1;
+    if(window.matchMedia('(max-width:980px)').matches)return 2;
+    return 3;
+  }
+  function goTo(next){
+    if(!totalPages)return;
+    page=(next%totalPages+totalPages)%totalPages;
+    var cards=list.children;
+    if(!cards.length)return;
+    var gap=14;
+    var width=cards[0].getBoundingClientRect().width;
+    list.style.transform='translateX(' + (-page*(width+gap)*1) + 'px)';
+    // page advances by 1 card for smoother carousel
+    Array.prototype.forEach.call(dotsBox.children,function(dot,i){
+      dot.classList.toggle('is-active', i===page);
+    });
+    prevBtn.disabled=totalPages<=1;
+    nextBtn.disabled=totalPages<=1;
+  }
+  function setupCarousel(count){
+    perPage=visibleCount();
+    totalPages=Math.max(count,0);
+    dotsBox.innerHTML='';
+    if(count<=perPage){
+      prevBtn.hidden=true;nextBtn.hidden=true;dotsBox.hidden=true;
+      list.style.transform='translateX(0)';
+      return;
+    }
+    prevBtn.hidden=false;nextBtn.hidden=false;dotsBox.hidden=false;
+    // one dot per starting card index that fits
+    var maxStart=Math.max(count-perPage,0);
+    totalPages=maxStart+1;
+    for(var i=0;i<totalPages;i++){
+      var b=document.createElement('button');
+      b.type='button';
+      b.setAttribute('aria-label','Ir a reseña '+(i+1));
+      (function(idx){b.onclick=function(){goTo(idx);restartAuto()}})(i);
+      dotsBox.appendChild(b);
+    }
+    page=Math.min(page,totalPages-1);
+    goTo(page);
+  }
+  function restartAuto(){
+    clearInterval(autoTimer);
+    if(totalPages<=1)return;
+    autoTimer=setInterval(function(){goTo(page+1)},5000);
+  }
   function render(data){
     document.getElementById('lupoReviewsAverage').textContent=data.total?data.average.toFixed(1):'—';
     document.getElementById('lupoReviewsStars').textContent=data.total?stars(Math.round(data.average)):'☆☆☆☆☆';
     document.getElementById('lupoReviewsTotal').textContent=data.total?data.total+' '+(data.total===1?'reseña':'reseñas'):'Sin reseñas todavía';
-    if(!data.reviews.length){list.innerHTML='<div class="lupo-reviews__empty">Sé la primera persona en contar su experiencia con este producto.</div>';return}
-    list.innerHTML=data.reviews.map(function(r){return'<article class="lupo-review-card"><div class="lupo-review-card__top"><span class="lupo-review-card__stars">'+stars(r.rating)+'</span><time>'+new Date(r.created_at).toLocaleDateString('es-AR')+'</time></div>'+(r.title?'<h3>'+esc(r.title)+'</h3>':'')+'<p>'+esc(r.comment)+'</p>'+((r.image_urls&&r.image_urls.length)?'<div class="lupo-review-card__images">'+r.image_urls.map(function(src){return'<img src="'+encodeURI(src)+'" alt="Foto de la reseña" loading="lazy">'}).join('')+'</div>':'')+'<div class="lupo-review-card__customer">'+esc(r.customer_name)+(r.verified_purchase?'<span class="lupo-review-card__verified">✓ Compra verificada</span>':'')+'</div></article>'}).join('');
+    if(!data.reviews.length){
+      carousel.hidden=true;empty.hidden=false;clearInterval(autoTimer);return;
+    }
+    empty.hidden=true;carousel.hidden=false;
+    list.innerHTML=data.reviews.map(function(r){
+      return'<article class="lupo-review-card"><div class="lupo-review-card__top"><span class="lupo-review-card__stars">'+stars(r.rating)+'</span><time>'+new Date(r.created_at).toLocaleDateString('es-AR')+'</time></div>'+(r.title?'<h3>'+esc(r.title)+'</h3>':'')+'<p>'+esc(r.comment)+'</p>'+((r.image_urls&&r.image_urls.length)?'<div class="lupo-review-card__images">'+r.image_urls.map(function(src){return'<img src="'+encodeURI(src)+'" alt="Foto de la reseña" loading="lazy">'}).join('')+'</div>':'')+'<div class="lupo-review-card__customer">'+esc(r.customer_name)+(r.verified_purchase?'<span class="lupo-review-card__verified">✓ Compra verificada</span>':'')+'</div></article>';
+    }).join('');
+    page=0;
+    setupCarousel(data.reviews.length);
+    restartAuto();
   }
-  function load(){fetch(API_URL+'/api/reviews/'+encodeURIComponent(current.id)).then(function(r){return r.json()}).then(render).catch(function(){list.innerHTML='<div class="lupo-reviews__empty">No pudimos cargar las reseñas.</div>'})}
+  function load(){
+    fetch(API_URL+'/api/reviews/'+encodeURIComponent(current.id))
+      .then(function(r){return r.json()})
+      .then(render)
+      .catch(function(){
+        carousel.hidden=true;empty.hidden=false;
+        empty.textContent='No pudimos cargar las reseñas.';
+      });
+  }
+  prevBtn.onclick=function(){goTo(page-1);restartAuto()};
+  nextBtn.onclick=function(){goTo(page+1);restartAuto()};
+  window.addEventListener('resize',function(){
+    if(!list.children.length)return;
+    setupCarousel(list.children.length);
+  });
+
   var dialog=document.getElementById('lupoReviewDialog');
   document.getElementById('lupoReviewOpen').onclick=function(){dialog.showModal()};
   document.getElementById('lupoReviewClose').onclick=function(){dialog.close()};
   dialog.onclick=function(e){if(e.target===dialog)dialog.close()};
-  document.getElementById('lupoReviewImages').onchange=function(e){var box=document.getElementById('lupoReviewPreview'),files=[].slice.call(e.target.files,0,3);box.innerHTML='';files.forEach(function(file){var img=document.createElement('img');img.src=URL.createObjectURL(file);box.appendChild(img)})};
-  list.onclick=function(e){if(e.target.tagName!=='IMG')return;var box=document.createElement('div');box.className='lupo-review-lightbox';box.innerHTML='<img src="'+e.target.src+'" alt="Foto ampliada">';box.onclick=function(){box.remove()};document.body.appendChild(box)};
+  document.getElementById('lupoReviewImages').onchange=function(e){
+    var box=document.getElementById('lupoReviewPreview'),files=[].slice.call(e.target.files,0,3);
+    box.innerHTML='';
+    files.forEach(function(file){var img=document.createElement('img');img.src=URL.createObjectURL(file);box.appendChild(img)});
+  };
+  list.onclick=function(e){
+    if(e.target.tagName!=='IMG')return;
+    var box=document.createElement('div');
+    box.className='lupo-review-lightbox';
+    box.innerHTML='<img src="'+e.target.src+'" alt="Foto ampliada">';
+    box.onclick=function(){box.remove()};
+    document.body.appendChild(box);
+  };
   document.getElementById('lupoReviewForm').onsubmit=function(e){
-    e.preventDefault();var form=e.currentTarget,button=form.querySelector('[type=submit]'),message=document.getElementById('lupoReviewMessage'),data=new FormData(form),files=data.getAll('images');
+    e.preventDefault();
+    var form=e.currentTarget,button=form.querySelector('[type=submit]'),message=document.getElementById('lupoReviewMessage'),data=new FormData(form),files=data.getAll('images');
     if(files.length>3){message.textContent='Podés subir hasta 3 imágenes.';return}
-    data.set('product_id',current.id);data.set('product_name',current.name);data.set('product_url',current.url);button.disabled=true;button.textContent='Enviando…';message.textContent='';
-    fetch(API_URL+'/api/reviews',{method:'POST',body:data}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error);return j})}).then(function(j){message.textContent=j.message;form.reset();document.getElementById('lupoReviewPreview').innerHTML='';setTimeout(function(){dialog.close()},2200)}).catch(function(err){message.textContent=err.message}).finally(function(){button.disabled=false;button.textContent='Enviar reseña'})
+    data.set('product_id',current.id);data.set('product_name',current.name);data.set('product_url',current.url);
+    button.disabled=true;button.textContent='Enviando…';message.textContent='';
+    fetch(API_URL+'/api/reviews',{method:'POST',body:data})
+      .then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error);return j})})
+      .then(function(j){message.textContent=j.message;form.reset();document.getElementById('lupoReviewPreview').innerHTML='';setTimeout(function(){dialog.close()},2200)})
+      .catch(function(err){message.textContent=err.message})
+      .finally(function(){button.disabled=false;button.textContent='Enviar reseña'});
   };
   load();
 })();

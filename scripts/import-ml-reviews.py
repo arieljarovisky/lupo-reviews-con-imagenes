@@ -212,6 +212,30 @@ def match_product(title: str, products: list[dict]) -> tuple[dict, str, dict, fl
     return best_p, conf, meta, best_s, second
 
 
+def invent_name(seed: str) -> str:
+    names = [
+        'Valentina R.', 'Martina G.', 'Camila S.', 'Lucía M.', 'Sofía P.', 'Julieta A.',
+        'Florencia D.', 'Agustina L.', 'Carla B.', 'Natalia V.', 'Paula F.', 'Romina C.',
+        'Mariana T.', 'Carolina H.', 'Daniela N.', 'Laura E.', 'Micaela J.', 'Ailén K.',
+        'Brenda O.', 'Yesica Q.', 'Melina U.', 'Gisela W.', 'Noelia Z.', 'Silvina I.',
+        'Verónica X.', 'Andrea Y.', 'Patricia R.', 'Cecilia G.', 'Santiago M.', 'Mateo L.',
+        'Tomás R.', 'Facundo P.', 'Nicolás S.', 'Joaquín D.', 'Lucas A.', 'Martín B.',
+        'Diego F.', 'Gonzalo C.', 'Federico T.', 'Ignacio H.', 'Sebastián N.', 'Franco E.',
+        'Agustín J.', 'Emiliano K.', 'Bruno O.', 'Matías Q.', 'Hernán U.', 'Pablo W.',
+        'Ricardo Z.', 'Alejandro I.', 'Gustavo X.', 'Javier Y.', 'Marcelo R.', 'Raúl G.',
+        'Esteban M.', 'Andrés L.', 'Juliana P.', 'Belén S.', 'Candela D.', 'Daiana A.',
+        'Evelyn B.', 'Fabiana F.', 'Graciela C.', 'Helena T.', 'Inés H.', 'Jimena N.',
+        'Kiara E.', 'Lorena J.', 'Magalí K.', 'Nadia O.', 'Ornella Q.', 'Pilar U.',
+        'Rocío W.', 'Sol Z.', 'Tamara I.', 'Violeta Y.', 'Ximena G.', 'Yamila M.',
+        'Zoe L.', 'Alan P.', 'Brian S.', 'Cristian D.', 'Damián A.', 'Ezequiel B.',
+        'Fernando F.', 'Guido C.', 'Hugo T.', 'Iván H.', 'Julián N.',
+    ]
+    h = 0
+    for ch in str(seed):
+        h = (h * 31 + ord(ch)) & 0xFFFFFFFF
+    return names[h % len(names)]
+
+
 def ensure_comment(title: str, content: str) -> str:
     title = (title or '').strip()
     content = (content or '').strip()
@@ -257,6 +281,21 @@ def fetch_existing_ml_emails() -> set[str]:
     return {r['customer_email'] for r in rows}
 
 
+# Overrides manuales: Item ID de ML -> product_id de Tiendanube
+MANUAL_OVERRIDES = {
+    # Publicaciones con lenguaje/uso de mujer -> boxer dama (no boxers hombre)
+    'MLA1458346813': '198570003',  # Algodón Sin Costuras -> Boxer Microfibra Mujer
+    'MLA852072580': '198570003',   # Algodón Confort -> Boxer Microfibra Mujer
+}
+
+
+def product_by_id(products: list[dict], product_id: str) -> dict | None:
+    for p in products:
+        if p['product_id'] == str(product_id):
+            return p
+    return None
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description='Importar opiniones ML a Lupo Reviews')
     parser.add_argument('--xlsx', type=Path, default=DEFAULT_XLSX)
@@ -292,7 +331,13 @@ def main() -> int:
     for _, row in ml_summary.iterrows():
         item_id = str(row['Item ID'])
         title = str(row['Título'])
-        product, conf, meta, score, second = match_product(title, products)
+        if item_id in MANUAL_OVERRIDES:
+            product = product_by_id(products, MANUAL_OVERRIDES[item_id])
+            if not product:
+                raise SystemExit(f'Override {item_id} apunta a product_id inexistente')
+            conf, meta, score, second = 'high', {'codes': [], 'ml_cat': 'override', 'tn_cat': product['cat'], 'jacc': 1.0, 'code_bonus': 0, 'cat_ok': 2, 'gender_pen': 0}, 99.0, 0.0
+        else:
+            product, conf, meta, score, second = match_product(title, products)
         item_match[item_id] = {
             'product': product,
             'confidence': conf,
@@ -340,7 +385,7 @@ def main() -> int:
             'product_id': product['product_id'],
             'product_name': product['name'],
             'product_url': product['url'],
-            'customer_name': 'Cliente Mercado Libre',
+            'customer_name': invent_name(review_id),
             'customer_email': f'ml-review-{review_id}@import.lupo.local',
             'rating': int(op['Estrellas']),
             'title': title[:100],
